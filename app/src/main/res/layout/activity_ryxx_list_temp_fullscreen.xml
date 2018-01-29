@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/v4_listview"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:background="@android:color/white"
+                     />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="right">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:background="@color/material_grey_300"
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp">
+
+                        <TextView
+                            android:id="@+id/_id"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text=""
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/dwmc"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="单位部门" />
+
+                        <TextView
+                            android:id="@+id/xrzw"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="现任职务" />
+
+                        <TextView
+                            android:id="@+id/xmhz"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="姓  名" />
+
+                        <TextView
+                            android:id="@+id/xbhz"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="性  别" />
+
+                        <TextView
+                            android:id="@+id/csny"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="出生年月" />
+
+                        <TextView
+                            android:id="@+id/jbhz"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="级  别" />
+
+                        <TextView
+                            android:id="@+id/xl"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="学  历" />
+
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/ryxx_list_full"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:layout_margin="3dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/listReturnButton"
+                        android:text="返回上一层"
+                        android:textSize="24dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="right" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:id="@+id/v4_listview"
+                    android:choiceMode="singleChoice"
+                    android:background="@android:color/white" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="right">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="范围选择"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioButton1"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:text="全部"
+                                android:textSize="20dp" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton2"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:checked="true"
+                                android:text="领导人员"
+                                android:textSize="20dp" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton3"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:text="其他干部"
+                                android:textSize="20dp" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton5"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:text="二线人员"
+                                android:textSize="20dp" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton4"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:text="减少人员"
+                                android:textSize="20dp"
+                                android:visibility="invisible" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="数据更新" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="更新数据"
+                        android:textSize="30dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="研制单位:人事处,信息技术所"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="技术支持:"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="人事处:李吉乾 22721 路阳 20751"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:gravity="left"
+                            android:text="信息技术所:李广辉 22336-613"
+                            android:textSize="18dp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+</RelativeLayout>

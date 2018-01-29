@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">中国铁路郑州局集团有限公司领导人员信息查询系统2.0 (试用版)</string>
+    <string name="action_settings">Settings</string>
+    <string name="tishiXX">此处输入姓名,可进行模糊查询</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="soft_update_no">已经是最新版本</string>
+    <string name="soft_update_title">软件更新</string>
+    <string name="soft_update_info">检测到新版本，立即更新吗？</string>
+    <string name="soft_update_updatebtn">更新</string>
+    <string name="soft_update_later">稍后更新</string>
+    <string name="soft_updating">正在更新</string>
+    <string name="soft_update_cancel">取消</string>
+    <string name="soft_success_title">软件更新完成</string>
+    <string name="soft_success_info">新数据已经更新</string>
+    <string name="soft_success_succesbtn">确定</string>
+    <string name="soft_fail_failbtn">确定</string>
+    <string name="soft_fail_title">更新失败</string>
+    <string name="soft_fail_info">新数据更新失败，请检查网络连接；若网络连接正常，请联系管理员解决。</string>
+    <string name="soft_finish_title">更新结束</string>
+    <string name="soft_finish_info">更新结束</string>
+    <string name="soft_finish_succesbtn">确定</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_base">BaseActivity</string>
+</resources>
