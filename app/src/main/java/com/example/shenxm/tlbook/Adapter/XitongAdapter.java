@@ -31,14 +31,16 @@ public class XitongAdapter extends BaseAdapter {
 
     public List<DanweiModel> danweiModelList;
     DanweiAdapter danweiAdapter;
+    DanweiAdapter.DanweiClickListener mDanweiListener;
 
     private MainFragment mainFragment;
 
-    public XitongAdapter(List<XitongModel> list,Context context, MainFragment mainFragment)
+    public XitongAdapter(List<XitongModel> list, Context context, MainFragment mainFragment, DanweiAdapter.DanweiClickListener danweiListener)
     {
         this.context=context;
         this.myList=list;
         this.mainFragment = mainFragment;
+        this.mDanweiListener = danweiListener;
         xitongAdapter=this;
     }
     @Override
@@ -84,7 +86,7 @@ public class XitongAdapter extends BaseAdapter {
                 mainFragment.xt_gview.setVisibility(View.GONE);
                 mainFragment.dw_gview.setVisibility(View.VISIBLE);
 
-                danweiAdapter=new DanweiAdapter(danweiModelList,context,mainFragment);
+                danweiAdapter=new DanweiAdapter(danweiModelList,context,mainFragment,mDanweiListener);
                 mainFragment.dw_gview.setAdapter(danweiAdapter);
 //                Toast.makeText(context,xn.getDeptname(),Toast.LENGTH_SHORT).show();
             }

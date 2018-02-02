@@ -2,32 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center"
+    >
 
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ListView
-                    android:id="@+id/v4_listview"
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:background="@android:color/white"
-                     />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="right">
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="1280dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
+                        android:gravity="center"
                         android:background="@color/material_grey_300"
                         android:orientation="horizontal"
                         android:layout_margin="3dp">
@@ -104,16 +90,5 @@
 
                         android:layout_margin="3dp" />
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:id="@+id/listReturnButton"
-                        android:text="返回上一层"
-                        android:textSize="24dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="right" />
-
-                </LinearLayout>
-            </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

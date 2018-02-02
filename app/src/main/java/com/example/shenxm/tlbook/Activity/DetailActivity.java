@@ -29,7 +29,6 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     private String[] rybmlist;
     private ArrayList<String> jlArraylist = new ArrayList<String>();
-    private ListView listView;
     private int i;
     private static Handler handler = new Handler();
     @Override
@@ -37,15 +36,14 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_detail);
-        listView=(ListView)findViewById(R.id.listView);
-        initDate();
-        Button returnBtn = (Button) findViewById(R.id.returnbutton);
+        final LinearLayout returnBtn = (LinearLayout) findViewById(R.id.back_button);
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                /* Intent in = new Intent();
                 in.setClass(DetailActivity.this,Main2Activity.class);
                 startActivity(in);*/
+                returnBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 finish();
                 /*//jump to Login page
                 DetailActivity.this.startActivity(new Intent(DetailActivity.this,Main2Activity.class));
@@ -53,6 +51,8 @@ public class DetailActivity extends AppCompatActivity {
                 DetailActivity.this.finish();*/
             }
         });
+
+
 
         final TextView name = (TextView) findViewById(R.id.NametextView2);
         final TextView gender = (TextView) findViewById(R.id.GendertextView4);
@@ -184,38 +184,4 @@ public class DetailActivity extends AppCompatActivity {
 }
 }
 
-    private void initDate(){
-        final List<String> list = new ArrayList<String>();
-        list.add("");
-        list.add("按照系统单位查询");
-        list.add("");
-        list.add("按照姓名查询");
-        list.add("");
-        list.add("系统设置");
-        list.add("");
-        list.add("返回");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position == 1) {
-                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else if (position == 3) {
-                    Intent intent=new Intent(DetailActivity.this,SearchActivity.class);
-                    startActivity(intent);
-
-                } else if (position == 5) {
-                    Intent intent=new Intent(DetailActivity.this,EditUserActivity.class);
-                    startActivity(intent);
-                }else if (position == 7) {
-                    finish();
-                }
-                // showDrawerLayout();
-            }
-        });
-
-    }
 }

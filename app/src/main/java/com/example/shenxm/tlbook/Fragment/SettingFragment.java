@@ -32,8 +32,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SettingFragment extends Fragment {
     String ranage;
-    private ListView listView;
-    private DrawerLayout drawerLayout;
     ProgressBar progressBar;
     View view;
 
@@ -54,7 +52,6 @@ public class SettingFragment extends Fragment {
 
     private void initView(){
 
-        listView=(ListView)view.findViewById(R.id.v4_listview);
 //        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
 
         Button updateBtn = (Button)view.findViewById(R.id.button2);

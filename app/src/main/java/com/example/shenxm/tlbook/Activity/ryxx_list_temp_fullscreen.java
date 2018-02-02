@@ -1,4 +1,4 @@
-package com.example.shenxm.tlbook;
+package com.example.shenxm.tlbook.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +14,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shenxm.tlbook.Activity.EditUserActivity;
-import com.example.shenxm.tlbook.Activity.MainActivity;
-import com.example.shenxm.tlbook.Activity.SearchActivity;
 import com.example.shenxm.tlbook.Adapter.PersonsAdapter;
+import com.example.shenxm.tlbook.Comm;
 import com.example.shenxm.tlbook.Dal.PersonsDal;
 import com.example.shenxm.tlbook.Model.ListModel;
+import com.example.shenxm.tlbook.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class ryxx_list_temp_fullscreen extends AppCompatActivity {
     private String deptname = "";
     List<ListModel> mylist;
     PersonsAdapter personsAdapter;
-    private ListView leftListView;
     private DrawerLayout drawerLayout;
     private Context myContent;
     TextView xingbieBtn;
@@ -59,14 +57,11 @@ public class ryxx_list_temp_fullscreen extends AppCompatActivity {
 
         code = intent.getStringExtra("code");
         deptname = intent.getStringExtra("deptname");
-        ranage=Comm.range;
+        ranage= Comm.range;
         mylist = PersonsDal.getPersons(code, deptname, ranage);
         personsAdapter = new PersonsAdapter(mylist, this);
         personsListView.setAdapter(personsAdapter);
-
-        leftListView = (ListView) findViewById(R.id.v4_listview);
 //        drawerLayout = (DrawerLayout) findViewById(R.id.v4_drawerlayout);
-        initData();
         myContent = this;
 
         Button returnBtn = (Button) findViewById(R.id.listReturnButton);
@@ -173,39 +168,6 @@ public class ryxx_list_temp_fullscreen extends AppCompatActivity {
 
     }
 
-    private void initData() {
-        final List<String> list = new ArrayList<String>();
-        list.add("");
-        list.add("按照系统单位查询");
-        list.add("");
-        list.add("按照姓名查询");
-        list.add("");
-        list.add("系统设置");
-        list.add("");
-        list.add("返回");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        leftListView.setAdapter(arrayAdapter);
-        leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position == 1) {
-                    Intent intent = new Intent(ryxx_list_temp_fullscreen.this, MainActivity.class);
-                    myContent.startActivity(intent);
-                } else if (position == 3) {
-                    Intent intent=new Intent(ryxx_list_temp_fullscreen.this,SearchActivity.class);
-                    startActivity(intent);
-                } else if (position == 5) {
-                    Intent intent=new Intent(ryxx_list_temp_fullscreen.this,EditUserActivity.class);
-                    startActivity(intent);
-                }else if (position == 7) {
-                    finish();
-                }
-                //showDrawerLayout();
-            }
-        });
-//        drawerLayout.openDrawer(Gravity.LEFT);//侧滑打开  不设置则不会默认打开
-    }
 
     private void showDrawerLayout() {
         if (!drawerLayout.isDrawerOpen(Gravity.LEFT)) {

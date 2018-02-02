@@ -19,7 +19,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ryxx_list_temp_fullscreen" />
+        <activity android:name=".Activity.ryxx_list_temp_fullscreen" />
         <activity android:name=".Activity.DetailActivity" />
         <activity android:name=".Activity.EditUserActivity" />
         <activity android:name=".Activity.SearchActivity" />

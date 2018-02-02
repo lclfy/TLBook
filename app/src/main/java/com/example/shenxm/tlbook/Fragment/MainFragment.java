@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.shenxm.tlbook.Adapter.XitongAdapter;
+import com.example.shenxm.tlbook.Adapter.DanweiAdapter;
 import com.example.shenxm.tlbook.Comm;
 import com.example.shenxm.tlbook.Dal.ComDal;
 import com.example.shenxm.tlbook.Dal.XitongDal;
@@ -28,12 +29,14 @@ public class MainFragment extends Fragment {
     private View view;
     public GridView xt_gview;
     public GridView dw_gview;
-    private ListView listView;
+
+    private
 
 
     List<XitongModel> xitongArrayList;
 
     XitongAdapter xitongAdapter;
+    DanweiAdapter.DanweiClickListener mDanweiClickListener;
 
 
     @Override
@@ -57,12 +60,20 @@ public class MainFragment extends Fragment {
 //      ComDal.CreateDb(this);
         xt_gview = (GridView)view.findViewById(R.id.xt_gridView);
         dw_gview=(GridView)view.findViewById(R.id.dw_gridView);
-        listView=(ListView)view.findViewById(R.id.v4_listview);
-//        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
-//        System.out.println("dwgview "+dw_gview.getVisibility());
         xitongArrayList= XitongDal.getXitong();
-        xitongAdapter=new XitongAdapter(xitongArrayList,getActivity(),this);
+        xitongAdapter=new XitongAdapter(xitongArrayList,getActivity(),this,mDanweiClickListener);
         xt_gview.setAdapter(xitongAdapter);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DanweiAdapter.DanweiClickListener) {
+            mDanweiClickListener = (DanweiAdapter.DanweiClickListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     public String getSave() {

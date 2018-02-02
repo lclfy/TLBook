@@ -1,22 +1,21 @@
 package com.example.shenxm.tlbook.Adapter;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.shenxm.tlbook.Fragment.MainFragment;
 import com.example.shenxm.tlbook.Model.DanweiModel;
 
-import com.example.shenxm.tlbook.Model.XitongModel;
 import com.example.shenxm.tlbook.R;
-import com.example.shenxm.tlbook.ryxx_list_temp_fullscreen;
+import com.example.shenxm.tlbook.Activity.ryxx_list_temp_fullscreen;
 
 import java.util.List;
 
@@ -24,15 +23,24 @@ import java.util.List;
  * Created by SHENXM on 2017/12/28.
  */
 
-public class DanweiAdapter extends BaseAdapter {
+public class DanweiAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private List<DanweiModel> myList;
     private ViewHolder viewHolder;
     private DanweiAdapter danweiAdapter;
     private MainFragment mainFragment;
+    private DanweiModel danweiItem;
 
-    public DanweiAdapter (List<DanweiModel> list,Context context, MainFragment mainFragment)
+    private DanweiClickListener mListener;
+
+    //接口-用于使原Activity获取数据
+    public interface DanweiClickListener{
+        public void danweiClickListener(View v,Bundle bundle);
+    }
+
+    public DanweiAdapter (List<DanweiModel> list,Context context, MainFragment mainFragment, DanweiClickListener Listener)
     {
+        this.mListener = Listener;
         this.context=context;
         this.myList=list;
         this.mainFragment = mainFragment;
@@ -46,6 +54,7 @@ public class DanweiAdapter extends BaseAdapter {
         }
         return 0;
     }
+
 
     @Override
     public Object getItem(int i) {
@@ -70,20 +79,21 @@ public class DanweiAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final DanweiModel item = myList.get(position);
-        viewHolder.name.setText(item.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
-        viewHolder.name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(context,ryxx_list_temp_fullscreen.class);
-                intent.putExtra("code",item.danweiCode);
-                intent.putExtra("deptname",item.danweiname+":"+item.danweiid);
-                context.startActivity(intent);
-            }
-        });
-
+        danweiItem = myList.get(position);
+        viewHolder.name.setText(danweiItem.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
+        viewHolder.name.setOnClickListener(this);
+        viewHolder.name.setTag(position);
         return convertView;
     }
+
+    @Override
+    public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("code",danweiItem.danweiCode);
+        bundle.putString("deptname",danweiItem.danweiname+":"+danweiItem.danweiid);
+        mListener.danweiClickListener(view,bundle);
+    }
+
 
     public static class ViewHolder {
         public TextView name;

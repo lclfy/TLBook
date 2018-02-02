@@ -30,7 +30,6 @@ import java.util.List;
 
 
 public class SearchFragment extends Fragment {
-    private ListView listView;
     private DrawerLayout drawerLayout;
     private View view;
 
@@ -64,8 +63,6 @@ public class SearchFragment extends Fragment {
     }
 
     private void initView(){
-
-        listView=(ListView)view.findViewById(R.id.v4_listview);
 //        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
         final ListView personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
         xingbieBtn = (TextView)view.findViewById(R.id.xbhz);

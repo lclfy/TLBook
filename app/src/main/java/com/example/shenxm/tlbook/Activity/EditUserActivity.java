@@ -28,7 +28,6 @@ import java.util.List;
 public class EditUserActivity extends AppCompatActivity {
 
     String ranage;
-    private ListView listView;
     private DrawerLayout drawerLayout;
     ProgressBar progressBar;
     @Override
@@ -36,7 +35,6 @@ public class EditUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_edit_user);
-        listView=(ListView)findViewById(R.id.v4_listview);
 //        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
 
         Button updateBtn = (Button)findViewById(R.id.button2);
@@ -94,7 +92,7 @@ public class EditUserActivity extends AppCompatActivity {
         }else{
             radioButton2.setChecked(true);
         }
-        initDate();
+
     }
 
  /*   protected void dialog(){
@@ -155,40 +153,6 @@ public class EditUserActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private void initDate(){
-        final List<String> list = new ArrayList<String>();
-        list.add("");
-        list.add("按照系统单位查询");
-        list.add("");
-        list.add("按照姓名查询");
-        list.add("");
-        list.add("系统设置");
-        list.add("");
-        list.add("返回");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(position == 1){
-                    Intent intent=new Intent(EditUserActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }else if(position == 3){
-                    Intent intent=new Intent(EditUserActivity.this,SearchActivity.class);
-                    startActivity(intent);
-                }else if(position == 5 ){
-                    Intent intent=new Intent(EditUserActivity.this,EditUserActivity.class);
-                    startActivity(intent);
-                }else if(position == 7 ){
-                    Intent intent=new Intent(EditUserActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }
-                //showDrawerLayout();
-            }
-        });
-
-    }
 
     private void showDrawerLayout() {
         if (!drawerLayout.isDrawerOpen(Gravity.LEFT)) {

@@ -27,7 +27,6 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private ListView listView;
     private DrawerLayout drawerLayout;
 
     private String ranage = "领导人员";
@@ -50,7 +49,6 @@ public class SearchActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_search);
         myContent = this;
-        listView=(ListView)findViewById(R.id.v4_listview);
 //        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
         final ListView personsListView = (ListView)findViewById(R.id.ryxx_list_full);
         xingbieBtn = (TextView)findViewById(R.id.xbhz);
@@ -194,44 +192,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-        initDate();
-
-
-    }
-
-    private void initDate(){
-        final List<String> list = new ArrayList<String>();
-        list.add("");
-        list.add("按照系统单位查询");
-        list.add("");
-        list.add("按照姓名查询");
-        list.add("");
-        list.add("系统设置");
-        list.add("");
-        list.add("返回");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(position == 1){
-                    Intent intent=new Intent(SearchActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }else if(position == 3){
-                    Intent intent=new Intent(SearchActivity.this,SearchActivity.class);
-                    startActivity(intent);
-                }else if(position == 5 ){
-                    Intent intent=new Intent(SearchActivity.this,EditUserActivity.class);
-                    startActivity(intent);
-                }else if(position == 7 ){
-                    Intent intent=new Intent(SearchActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }
-               // showDrawerLayout();
-            }
-        });
-
     }
 
     private void showDrawerLayout() {
