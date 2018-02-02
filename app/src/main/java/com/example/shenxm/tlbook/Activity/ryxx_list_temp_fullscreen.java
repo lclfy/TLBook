@@ -64,20 +64,20 @@ public class ryxx_list_temp_fullscreen extends AppCompatActivity {
 //        drawerLayout = (DrawerLayout) findViewById(R.id.v4_drawerlayout);
         myContent = this;
 
-        Button returnBtn = (Button) findViewById(R.id.listReturnButton);
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               /* Intent in = new Intent();
-                in.setClass(DetailActivity.this,Main2Activity.class);
-                startActivity(in);*/
-                finish();
-                /*//jump to Login page
-                DetailActivity.this.startActivity(new Intent(DetailActivity.this,Main2Activity.class));
-                //finish this page
-                DetailActivity.this.finish();*/
-            }
-        });
+//        Button returnBtn = (Button) findViewById(R.id.listReturnButton);
+//        returnBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               /* Intent in = new Intent();
+//                in.setClass(DetailActivity.this,Main2Activity.class);
+//                startActivity(in);*/
+//                finish();
+//                /*//jump to Login page
+//                DetailActivity.this.startActivity(new Intent(DetailActivity.this,Main2Activity.class));
+//                //finish this page
+//                DetailActivity.this.finish();*/
+//            }
+//        });
 
         //sort functions
         xingbieBtn.setOnClickListener(new View.OnClickListener() {

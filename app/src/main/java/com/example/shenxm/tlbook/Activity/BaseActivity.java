@@ -186,13 +186,17 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 transaction.show(settingFragment);
                 break;
         }
-        //不要忘记提交事务
         transaction.commit();
     }
 
     //人员信息
     private void selectTab(Bundle selectedItem) {
         transaction = manager.beginTransaction();
+        //清除数据
+        Fragment tempFragment = manager.findFragmentByTag("personalInformationFragment");
+        if (tempFragment != null){
+            transaction.remove(tempFragment);
+        }
         //先隐藏所有的Fragment
         hideFragments(transaction);
         personalInformationFragment = new PersonalInformationFragment();
@@ -200,7 +204,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         transaction.add(R.id.id_content,personalInformationFragment,"personalInformationFragment");
         transaction.show(personalInformationFragment);
         currentFragment = personalInformationFragment;
-        //不要忘记提交事务
         transaction.commit();
     }
 

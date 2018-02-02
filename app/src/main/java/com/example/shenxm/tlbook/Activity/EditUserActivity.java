@@ -28,6 +28,7 @@ import java.util.List;
 public class EditUserActivity extends AppCompatActivity {
 
     String ranage;
+
     private DrawerLayout drawerLayout;
     ProgressBar progressBar;
     @Override

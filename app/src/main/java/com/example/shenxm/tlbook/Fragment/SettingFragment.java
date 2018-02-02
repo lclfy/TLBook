@@ -51,13 +51,10 @@ public class SettingFragment extends Fragment {
     }
 
     private void initView(){
-
-//        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
-
+        getSave();
         Button updateBtn = (Button)view.findViewById(R.id.button2);
         //progressBar= (ProgressBar) findViewById(R.id.progress                Bar);
         final TextView textView = (TextView)view.findViewById(R.id.textView25);
-
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +118,16 @@ public class SettingFragment extends Fragment {
         editor.putString("range", range);
         Comm.range=range;
         editor.commit();
+    }
+
+    public String getSave() {
+
+        SharedPreferences sp = getActivity().getSharedPreferences("SP",
+                android.content.Context.MODE_PRIVATE);
+
+        String name = sp.getString("range", "领导人员");
+        Comm.range=name;
+        return name;
     }
 
 }

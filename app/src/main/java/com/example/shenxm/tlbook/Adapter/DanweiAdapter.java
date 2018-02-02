@@ -23,13 +23,12 @@ import java.util.List;
  * Created by SHENXM on 2017/12/28.
  */
 
-public class DanweiAdapter extends BaseAdapter implements View.OnClickListener {
+public class DanweiAdapter extends BaseAdapter {
     private Context context;
     private List<DanweiModel> myList;
     private ViewHolder viewHolder;
-    private DanweiAdapter danweiAdapter;
     private MainFragment mainFragment;
-    private DanweiModel danweiItem;
+//    private DanweiModel danweiItem;
 
     private DanweiClickListener mListener;
 
@@ -44,7 +43,6 @@ public class DanweiAdapter extends BaseAdapter implements View.OnClickListener {
         this.context=context;
         this.myList=list;
         this.mainFragment = mainFragment;
-        danweiAdapter=this;
     }
     @Override
     public int getCount() {
@@ -69,29 +67,27 @@ public class DanweiAdapter extends BaseAdapter implements View.OnClickListener {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.item, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        danweiItem = myList.get(position);
-        viewHolder.name.setText(danweiItem.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
-        viewHolder.name.setOnClickListener(this);
+        final DanweiModel item = myList.get(position);
+        viewHolder.name.setText(item.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
+        viewHolder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("code",item.danweiCode);
+                bundle.putString("deptname",item.danweiname+":"+item.danweiid);
+                mListener.danweiClickListener(view,bundle);
+            }
+        });
         viewHolder.name.setTag(position);
         return convertView;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Bundle bundle = new Bundle();
-        bundle.putString("code",danweiItem.danweiCode);
-        bundle.putString("deptname",danweiItem.danweiname+":"+danweiItem.danweiid);
-        mListener.danweiClickListener(view,bundle);
     }
 
 
