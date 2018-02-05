@@ -15,6 +15,7 @@ import com.example.shenxm.tlbook.Comm;
 import com.example.shenxm.tlbook.Dal.PersonsDal;
 import com.example.shenxm.tlbook.Model.ListModel;
 import com.example.shenxm.tlbook.R;
+import com.mingle.widget.ShapeLoadingDialog;
 
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class PersonalInformationFragment extends Fragment {
     TextView xlBtn;
     TextView mTvToolbar;
 
+
+
     private int sort=0;
 
     @Override
@@ -49,7 +52,6 @@ public class PersonalInformationFragment extends Fragment {
 
     public void initView(Bundle selectedItem){
         final ListView personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
-//        final Intent intent = getActivity().getIntent();
         xingbieBtn = (TextView)view.findViewById(R.id.xbhz);
         danweiBtn = (TextView)view.findViewById(R.id.dwmc);
         xrzwBtn = (TextView)view.findViewById(R.id.xrzw);
@@ -66,7 +68,6 @@ public class PersonalInformationFragment extends Fragment {
         mylist = PersonsDal.getPersons(code, deptname, ranage);
         personsAdapter = new PersonsAdapter(mylist, getActivity());
         personsListView.setAdapter(personsAdapter);
-//        drawerLayout = (DrawerLayout) findViewById(R.id.v4_drawerlayout);
         myContent = getActivity();
 
         //sort functions
@@ -169,4 +170,5 @@ public class PersonalInformationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

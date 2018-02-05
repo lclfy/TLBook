@@ -2,6 +2,7 @@ package com.example.shenxm.tlbook.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,24 +14,27 @@ import com.example.shenxm.tlbook.Comm;
 import com.example.shenxm.tlbook.Activity.DetailActivity;
 import com.example.shenxm.tlbook.Model.ListModel;
 import com.example.shenxm.tlbook.R;
+import com.mingle.widget.ShapeLoadingDialog;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by SHENXM on 2017/12/28.
  */
 
-public class PersonsAdapter extends BaseAdapter {
+public class PersonsAdapter extends BaseAdapter implements Serializable {
     private Context context;
     private List<ListModel> myList;
     private ViewHolder viewHolder;
     private PersonsAdapter personsAdapter;
+
     public PersonsAdapter(List<ListModel> list,Context context)
     {
         this.context=context;
         this.myList=list;
-        personsAdapter=this;
     }
+
     @Override
     public int getCount() {
         if (myList!=null)
@@ -77,11 +81,9 @@ public class PersonsAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Comm.myModel=item;
                 Intent intent =new Intent(context,DetailActivity.class);
-
                 context.startActivity(intent);
             }
         });
-
         return convertView;
     }
 

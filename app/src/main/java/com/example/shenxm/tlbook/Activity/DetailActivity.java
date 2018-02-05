@@ -25,11 +25,13 @@ import com.example.shenxm.tlbook.Dal.PersonsDal;
 import com.example.shenxm.tlbook.Model.JianliModel;
 import com.example.shenxm.tlbook.Model.XlxxModel;
 import com.example.shenxm.tlbook.R;
+import com.mingle.widget.ShapeLoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
+
     private String[] rybmlist;
     private ArrayList<String> jlArraylist = new ArrayList<String>();
     private int i;
@@ -46,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
                /* Intent in = new Intent();
                 in.setClass(DetailActivity.this,Main2Activity.class);
                 startActivity(in);*/
-                returnBtn.setBackgroundResource(R.drawable.tabitem_selected);
+                returnBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 finish();
                 /*//jump to Login page
                 DetailActivity.this.startActivity(new Intent(DetailActivity.this,Main2Activity.class));
@@ -54,8 +56,6 @@ public class DetailActivity extends AppCompatActivity {
                 DetailActivity.this.finish();*/
             }
         });
-
-
 
         final TextView name = (TextView) findViewById(R.id.NametextView2);
         final TextView gender = (TextView) findViewById(R.id.GendertextView4);
@@ -201,9 +201,6 @@ public class DetailActivity extends AppCompatActivity {
 
     public static ListView setListViewHeightBasedOnChildren(ListView listView, ListAdapter listAdapter) {
         //设置list高度
-        if (listAdapter == null) {
-            return null;
-        }
         int totalHeight = 0;
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);

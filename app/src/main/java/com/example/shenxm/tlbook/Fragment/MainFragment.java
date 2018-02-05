@@ -6,6 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.transition.Fade;
+import android.transition.Scene;
+import android.transition.Slide;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +33,8 @@ public class MainFragment extends Fragment {
     private View view;
     public GridView xt_gview;
     public GridView dw_gview;
-
-    private
+    //动画容器
+    public ViewGroup sceneRoot;
 
 
     List<XitongModel> xitongArrayList;
@@ -58,8 +62,11 @@ public class MainFragment extends Fragment {
         getSave();
         ComDal.InitDb();
 //      ComDal.CreateDb(this);
-        xt_gview = (GridView)view.findViewById(R.id.xt_gridView);
-        dw_gview=(GridView)view.findViewById(R.id.dw_gridView);
+        sceneRoot = (ViewGroup)view.findViewById(R.id.scene_root);
+        xt_gview = (GridView)sceneRoot.findViewById(R.id.xt_gridView);
+        dw_gview=(GridView)sceneRoot.findViewById(R.id.dw_gridView);
+
+        xt_gview.setVisibility(View.VISIBLE);
         xitongArrayList= XitongDal.getXitong();
         xitongAdapter=new XitongAdapter(xitongArrayList,getActivity(),this,mDanweiClickListener);
         xt_gview.setAdapter(xitongAdapter);

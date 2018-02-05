@@ -12,8 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Scene;
+import android.transition.Slide;
+import android.transition.TransitionManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +48,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout mBackgroundMain;
     private LinearLayout mBackgroundSearch;
     private LinearLayout mBackgroundSetting;
+    private FrameLayout mContentView;
 
     private ImageView mainSideLight;
     private ImageView searchSideLight;
@@ -96,6 +103,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         mBackgroundMain = (LinearLayout) findViewById(R.id.menu_content);
         mBackgroundSearch = (LinearLayout) findViewById(R.id.search_content);
         mBackgroundSetting = (LinearLayout) findViewById(R.id.setting_content);
+        mContentView = (FrameLayout)findViewById(R.id.id_content);
 
         //获取FragmentManager对象
         manager = getSupportFragmentManager();
@@ -149,11 +157,15 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                 GridView mGvDanwei;
                 GridView mGvXitong;
                 tempFragment = manager.findFragmentByTag("mainFragment");
+                ViewGroup sceneRoot = (ViewGroup)findViewById(R.id.scene_root);
                 if (tempFragment != null){
-                    mGvXitong = (GridView) tempFragment.getView().findViewById(R.id.xt_gridView);
-                    mGvDanwei = (GridView)tempFragment.getView().findViewById(R.id.dw_gridView);
-                    mGvXitong.setVisibility(View.VISIBLE);
+                    TransitionManager.beginDelayedTransition(sceneRoot, new Fade());
+                    mGvXitong = (GridView) sceneRoot.findViewById(R.id.xt_gridView);
+                    mGvDanwei = (GridView)sceneRoot.findViewById(R.id.dw_gridView);
+
                     mGvDanwei.setVisibility(View.GONE);
+                    mGvXitong.setVisibility(View.VISIBLE);
+
                 }else {
                     MainFragment temp_mainFragment = new MainFragment();
                     manager.beginTransaction().add(R.id.id_content,temp_mainFragment).commit();
@@ -171,31 +183,39 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     //进行选中Tab的处理
     private void selectTab(int i) {
+        if ((i == 0 && currentFragment == mainFragment) ||
+                (i == 1 && currentFragment == searchFragment) ||
+                (i == 2 && currentFragment == settingFragment)){
+            return;
+        }
         transaction = manager.beginTransaction();
         //先隐藏所有的Fragment
         hideFragments(transaction);
         mainSideLight.setVisibility(View.INVISIBLE);
         searchSideLight.setVisibility(View.INVISIBLE);
         settingSideLight.setVisibility(View.INVISIBLE);
-        mBackgroundMain.setBackgroundColor(Color.TRANSPARENT);
-        mBackgroundSearch.setBackgroundColor(Color.TRANSPARENT);
-        mBackgroundSetting.setBackgroundColor(Color.TRANSPARENT);
+        mBackgroundMain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mBackgroundSearch.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mBackgroundSetting.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         switch (i) {
             case 0:
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 mainSideLight.setVisibility(View.VISIBLE);
-                mBackgroundMain.setBackgroundResource(R.drawable.tabitem_selected);
+                mBackgroundMain.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 currentFragment = mainFragment;
                 transaction.show(mainFragment);
                 break;
             case 1:
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 searchSideLight.setVisibility(View.VISIBLE);
-                mBackgroundSearch.setBackgroundResource(R.drawable.tabitem_selected);
+                mBackgroundSearch.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 currentFragment = searchFragment;
                 transaction.show(searchFragment);
                 break;
             case 2:
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 settingSideLight.setVisibility(View.VISIBLE);
-                mBackgroundSetting.setBackgroundResource(R.drawable.tabitem_selected);
+                mBackgroundSetting.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 currentFragment = settingFragment;
                 transaction.show(settingFragment);
                 break;
@@ -206,16 +226,19 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     //人员信息
     private void selectTab(Bundle selectedItem) {
         transaction = manager.beginTransaction();
-        //清除数据
         Fragment tempFragment = manager.findFragmentByTag("personalInformationFragment");
+        //清除数据
         if (tempFragment != null){
             transaction.remove(tempFragment);
+            transaction.commit();
         }
         //先隐藏所有的Fragment
+        transaction = manager.beginTransaction();
         hideFragments(transaction);
         personalInformationFragment = new PersonalInformationFragment();
         personalInformationFragment.setArguments(selectedItem);
         transaction.add(R.id.id_content,personalInformationFragment,"personalInformationFragment");
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.show(personalInformationFragment);
         currentFragment = personalInformationFragment;
         transaction.commit();

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:gravity="center"
-        android:background="@drawable/tabbar_background"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         >
 
@@ -27,7 +27,7 @@
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="1280dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
@@ -109,7 +109,6 @@
                         android:id="@+id/ryxx_list_full"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:layout_margin="3dp" />
     </LinearLayout>
 

@@ -19,28 +19,20 @@
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_gravity="right">
-                        <EditText
-                            android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        >
+                        <SearchView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editTextsearch"
-                            android:allowUndo="true"
-                            android:contextClickable="false"
-                            android:layout_weight="1"
+                            android:iconifiedByDefault="false"
                             android:enabled="true"
-                            android:layout_marginLeft="10dp"
-                            android:hint="@string/tishiXX" />
+                            android:gravity="center"
+                            android:layout_margin="16dp"
+                            android:hint="请输入查询的内容，可进行模糊查询" />
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:text="查询"
-                            android:id="@+id/buttonSearch" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="fill_parent"

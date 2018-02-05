@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TLBook.iml" filepath="$PROJECT_DIR$/TLBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shapeloading/shapeloading.iml" filepath="$PROJECT_DIR$/shapeloading/shapeloading.iml" />
       <module fileurl="file://$PROJECT_DIR$/xutils-3.3.40/xutils-3.3.40.iml" filepath="$PROJECT_DIR$/xutils-3.3.40/xutils-3.3.40.iml" />
     </modules>
   </component>

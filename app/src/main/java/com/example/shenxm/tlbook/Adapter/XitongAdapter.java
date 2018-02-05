@@ -1,6 +1,10 @@
 package com.example.shenxm.tlbook.Adapter;
 
 import android.content.Context;
+import android.transition.AutoTransition;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +29,6 @@ public class XitongAdapter extends BaseAdapter {
     private Context context;
     private List<XitongModel> myList;
     private ViewHolder viewHolder;
-    private XitongAdapter xitongAdapter;
 
     public List<DanweiModel> danweiModelList;
     DanweiAdapter danweiAdapter;
@@ -39,7 +42,6 @@ public class XitongAdapter extends BaseAdapter {
         this.myList=list;
         this.mainFragment = mainFragment;
         this.mDanweiListener = danweiListener;
-        xitongAdapter=this;
     }
     @Override
     public int getCount() {
@@ -79,8 +81,8 @@ public class XitongAdapter extends BaseAdapter {
         viewHolder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 danweiModelList= DanweiDal.getDanwei(xn.getDept_id());
+                TransitionManager.beginDelayedTransition(mainFragment.sceneRoot,new Fade());
                 mainFragment.xt_gview.setVisibility(View.GONE);
                 mainFragment.dw_gview.setVisibility(View.VISIBLE);
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:gravity="center_horizontal"
-    android:background="@drawable/tabbar_background"
+    android:background="@color/colorPrimary"
     >
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:id="@+id/mainSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#fff"
+            android:background="@color/colorAccent"
             android:visibility="invisible"
             />
         <LinearLayout
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:textColor="#fff"
+                android:textColor="#FFF"
                 android:text="目录"/>
 
         </LinearLayout>
@@ -66,7 +66,7 @@
             android:id="@+id/searchSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#fff"
+            android:background="@color/colorAccent"
             android:visibility="invisible"
             />
         <LinearLayout
@@ -86,8 +86,8 @@
                 android:id="@+id/include_main_two_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#FFF"
                 android:textSize="16dp"
-                android:textColor="#fff"
                 android:text="搜索"/>
         </LinearLayout>
     </LinearLayout>
@@ -103,7 +103,7 @@
             android:id="@+id/settingSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#fff"
+            android:background="@color/colorAccent"
             android:visibility="invisible"
             />
         <LinearLayout

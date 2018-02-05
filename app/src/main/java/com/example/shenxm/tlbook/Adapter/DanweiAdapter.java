@@ -75,6 +75,7 @@ public class DanweiAdapter extends BaseAdapter {
 
         final DanweiModel item = myList.get(position);
         viewHolder.name.setText(item.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
+        viewHolder.name.setBackgroundColor(context.getResources().getColor(R.color.item_color_second));
         viewHolder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

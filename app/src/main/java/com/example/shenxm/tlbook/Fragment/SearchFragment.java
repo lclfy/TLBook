@@ -3,6 +3,7 @@ package com.example.shenxm.tlbook.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.shenxm.tlbook.Adapter.PersonsAdapter;
@@ -39,6 +41,9 @@ public class SearchFragment extends Fragment {
     TextView xlBtn;
     private int sort=0;//desc
 
+    SearchView mSvText;
+    String searchedText;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,6 @@ public class SearchFragment extends Fragment {
     }
 
     private void initView(){
-//        drawerLayout=(DrawerLayout)findViewById(R.id.v4_drawerlayout);
         final ListView personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
         xingbieBtn = (TextView)view.findViewById(R.id.xbhz);
         danweiBtn = (TextView)view.findViewById(R.id.dwmc);
@@ -64,39 +68,30 @@ public class SearchFragment extends Fragment {
         csrqBtn = (TextView)view.findViewById(R.id.csny);
         jbBtn = (TextView)view.findViewById(R.id.jbhz);
         xlBtn = (TextView)view.findViewById(R.id.xl);
-        Button searchbutton = (Button)view.findViewById(R.id.buttonSearch);
 
-        final EditText searchEditText = (EditText)view.findViewById(R.id.editTextsearch);
-        //编辑search
-        searchEditText.setOnTouchListener(new View.OnTouchListener() {
+        mSvText = (SearchView) view.findViewById(R.id.editTextsearch);
+        mSvText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(searchEditText.getText().length()!=0){
-                    searchEditText.setText("");
-                }
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-        });
-
-        searchEditText.setOnClickListener(new View.OnClickListener() {
+            // 当搜索内容改变时触发该方法
             @Override
-            public void onClick(View view) {
-                searchEditText.setText("");
-            }
-        });
-        searchbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ranage= Comm.range;
-                String searchname = searchEditText.getText().toString();
-                if(!searchname.equals("")){
-                    mylist = PersonsDal.getZhuYaoCursorRange(searchname, ranage);
-                    personsAdapter = new PersonsAdapter(mylist, getActivity());
-                    personsListView.setAdapter(personsAdapter);
-                }else{
-                    System.out.println("请输入要查询的内容");
+            public boolean onQueryTextChange(String newText) {
+                //清空adapter
+                personsListView.setVisibility(View.INVISIBLE);
+                searchedText = newText;
+                if (!TextUtils.isEmpty(newText)) {
+                    ranage= Comm.range;
+                    String searchname = newText;
+                    if(!searchname.equals("")){
+                        personsListView.setVisibility(View.VISIBLE);
+                        mylist = PersonsDal.getZhuYaoCursorRange(searchname, ranage);
+                        personsAdapter = new PersonsAdapter(mylist, getActivity());
+                        personsListView.setAdapter(personsAdapter);
+                    }
                 }
+                return false;
             }
         });
 
@@ -105,7 +100,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"XBHZ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -119,7 +114,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"DWMC",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -133,7 +128,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"ZWMCHZ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -147,7 +142,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"XM",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -161,7 +156,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"CSRQ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -175,7 +170,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ranage=Comm.range;
-                String searchname = searchEditText.getText().toString();
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"JBHZ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
@@ -187,7 +182,7 @@ public class SearchFragment extends Fragment {
             }
         });xlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { String searchname = searchEditText.getText().toString();
+            public void onClick(View view) { String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"WHCDHZ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
