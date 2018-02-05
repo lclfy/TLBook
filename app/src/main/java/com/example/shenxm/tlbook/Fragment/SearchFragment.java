@@ -99,6 +99,10 @@ public class SearchFragment extends Fragment {
         xingbieBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"XBHZ",sort,ranage);
@@ -113,6 +117,10 @@ public class SearchFragment extends Fragment {
         });danweiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"DWMC",sort,ranage);
@@ -127,6 +135,10 @@ public class SearchFragment extends Fragment {
         });xrzwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"ZWMCHZ",sort,ranage);
@@ -141,6 +153,10 @@ public class SearchFragment extends Fragment {
         });xmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"XM",sort,ranage);
@@ -155,6 +171,10 @@ public class SearchFragment extends Fragment {
         });csrqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"CSRQ",sort,ranage);
@@ -169,6 +189,10 @@ public class SearchFragment extends Fragment {
         });jbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
                 ranage=Comm.range;
                 String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"JBHZ",sort,ranage);
@@ -182,7 +206,12 @@ public class SearchFragment extends Fragment {
             }
         });xlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { String searchname = searchedText;
+            public void onClick(View view) {
+                if (searchedText == null ||
+                        searchedText.equals("")){
+                    return;
+                }
+                String searchname = searchedText;
                 mylist = PersonsDal.getSortedCursorSearch(searchname,"WHCDHZ",sort,ranage);
                 personsAdapter = new PersonsAdapter(mylist, getActivity());
                 personsListView.setAdapter(personsAdapter);
