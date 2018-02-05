@@ -1,8 +1,5 @@
 package com.example.shenxm.tlbook.Fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,18 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shenxm.tlbook.Activity.SearchActivity;
 import com.example.shenxm.tlbook.Adapter.PersonsAdapter;
-import com.example.shenxm.tlbook.Adapter.XitongAdapter;
 import com.example.shenxm.tlbook.Comm;
-import com.example.shenxm.tlbook.Dal.ComDal;
 import com.example.shenxm.tlbook.Dal.PersonsDal;
 import com.example.shenxm.tlbook.Model.ListModel;
-import com.example.shenxm.tlbook.Model.XitongModel;
 import com.example.shenxm.tlbook.R;
 
 import java.util.List;

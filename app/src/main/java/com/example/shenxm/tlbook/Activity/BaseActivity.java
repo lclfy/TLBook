@@ -1,6 +1,9 @@
 package com.example.shenxm.tlbook.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -55,6 +58,17 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         initViews();//初始化控件
         initEvents();//初始化事件
         selectTab(0);//默认选中第一个Tab
+    }
+
+    @Override
+    protected void onResume() {
+        /**
+         * 设置为横屏
+         */
+        if(getRequestedOrientation()!=ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        super.onResume();
     }
 
     private void initEvents() {
@@ -163,25 +177,25 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         mainSideLight.setVisibility(View.INVISIBLE);
         searchSideLight.setVisibility(View.INVISIBLE);
         settingSideLight.setVisibility(View.INVISIBLE);
-        mBackgroundMain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mBackgroundSearch.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mBackgroundSetting.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mBackgroundMain.setBackgroundColor(Color.TRANSPARENT);
+        mBackgroundSearch.setBackgroundColor(Color.TRANSPARENT);
+        mBackgroundSetting.setBackgroundColor(Color.TRANSPARENT);
         switch (i) {
             case 0:
                 mainSideLight.setVisibility(View.VISIBLE);
-                mBackgroundMain.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                mBackgroundMain.setBackgroundResource(R.drawable.tabitem_selected);
                 currentFragment = mainFragment;
                 transaction.show(mainFragment);
                 break;
             case 1:
                 searchSideLight.setVisibility(View.VISIBLE);
-                mBackgroundSearch.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                mBackgroundSearch.setBackgroundResource(R.drawable.tabitem_selected);
                 currentFragment = searchFragment;
                 transaction.show(searchFragment);
                 break;
             case 2:
                 settingSideLight.setVisibility(View.VISIBLE);
-                mBackgroundSetting.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                mBackgroundSetting.setBackgroundResource(R.drawable.tabitem_selected);
                 currentFragment = settingFragment;
                 transaction.show(settingFragment);
                 break;

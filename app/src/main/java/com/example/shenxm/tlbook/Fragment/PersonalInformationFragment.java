@@ -1,18 +1,15 @@
 package com.example.shenxm.tlbook.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shenxm.tlbook.Activity.ryxx_list_temp_fullscreen;
 import com.example.shenxm.tlbook.Adapter.PersonsAdapter;
 import com.example.shenxm.tlbook.Comm;
 import com.example.shenxm.tlbook.Dal.PersonsDal;
@@ -38,10 +35,9 @@ public class PersonalInformationFragment extends Fragment {
     TextView csrqBtn;
     TextView jbBtn;
     TextView xlBtn;
+    TextView mTvToolbar;
 
     private int sort=0;
-
-    private OnFragmentInteractionListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +57,9 @@ public class PersonalInformationFragment extends Fragment {
         csrqBtn = (TextView)view.findViewById(R.id.csny);
         jbBtn = (TextView)view.findViewById(R.id.jbhz);
         xlBtn = (TextView)view.findViewById(R.id.xl);
+        mTvToolbar = (TextView)view.findViewById(R.id.tv_toolbar);
 
+        mTvToolbar.setText(selectedItem.getString("title"));
         code = selectedItem.getString("code");
         deptname = selectedItem.getString("deptname");
         ranage= Comm.range;

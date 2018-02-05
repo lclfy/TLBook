@@ -1,17 +1,20 @@
 package com.example.shenxm.tlbook.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
@@ -43,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
                /* Intent in = new Intent();
                 in.setClass(DetailActivity.this,Main2Activity.class);
                 startActivity(in);*/
-                returnBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                returnBtn.setBackgroundResource(R.drawable.tabitem_selected);
                 finish();
                 /*//jump to Login page
                 DetailActivity.this.startActivity(new Intent(DetailActivity.this,Main2Activity.class));
@@ -77,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
 
         final TextView jl = (TextView) findViewById(R.id.jltextView15);
 
-        final ListView jtcyList = (ListView)findViewById(R.id.jtcyListView1);
+        ListView jtcyList = (ListView)findViewById(R.id.jtcyListView1);
 
         final ImageView iv = (ImageView)findViewById(R.id.imageView);
         final TextView khqkTextView = (TextView)findViewById(R.id.khtextView15);
@@ -140,11 +143,12 @@ public class DetailActivity extends AppCompatActivity {
             //jtcy
             //创建SimpleCursorAdapter适配器将数据绑定到item显示控件上
             //1dp *1.5 为layoutparams 的单位
-            jtTextview.setLayoutParams(new LinearLayout.LayoutParams(170, (cur.getCount() + 1) * 120));
+            jtTextview.setLayoutParams(new LinearLayout.LayoutParams(170, (cur.getCount() + 2) * 120));
             if (cur != null) {
                 if (cur.moveToFirst()) {
                     System.out.println("Jtcy cur"+ cur.getCount());
                     SimpleCursorAdapter adapter = new SimpleCursorAdapter(DetailActivity.this, R.layout.jtcylistview, cur, new String[]{"_id", "HZMC", "CYXM", "CYRQ", "ZZMM", "CYGZDW"}, new int[]{R.id._id, R.id.hzmc, R.id.cyxm, R.id.nl, R.id.zzmm, R.id.cygzdw});
+                    jtcyList = setListViewHeightBasedOnChildren(jtcyList,adapter);
                     jtcyList.setAdapter(adapter);
                 }
             }
@@ -183,5 +187,37 @@ public class DetailActivity extends AppCompatActivity {
 
 }
 }
+
+    @Override
+    protected void onResume() {
+        /**
+         * 设置为横屏
+         */
+        if(getRequestedOrientation()!=ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        super.onResume();
+    }
+
+    public static ListView setListViewHeightBasedOnChildren(ListView listView, ListAdapter listAdapter) {
+        //设置list高度
+        if (listAdapter == null) {
+            return null;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        return listView;
+    }
+
 
 }

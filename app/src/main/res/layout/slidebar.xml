@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:gravity="center_horizontal"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/tabbar_background"
     >
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:id="@+id/mainSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@color/colorAccent"
+            android:background="#fff"
             android:visibility="invisible"
             />
         <LinearLayout
@@ -66,7 +66,7 @@
             android:id="@+id/searchSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@color/colorAccent"
+            android:background="#fff"
             android:visibility="invisible"
             />
         <LinearLayout
@@ -103,7 +103,7 @@
             android:id="@+id/settingSideLight"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@color/colorAccent"
+            android:background="#fff"
             android:visibility="invisible"
             />
         <LinearLayout

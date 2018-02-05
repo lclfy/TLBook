@@ -11,7 +11,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp">
+        android:paddingBottom="80dp"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/detailLinearLayout"
+                    android:layout_marginBottom="16dp"
                     android:focusable="false">
 
                     <LinearLayout
@@ -73,7 +75,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@drawable/textview_bar"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="16dp">
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -631,14 +633,9 @@
                                         </LinearLayout>
 
                                         <ListView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="800dp"
                                             android:layout_height="wrap_content"
                                             android:id="@+id/jtcyListView1"
-                                            android:choiceMode="singleChoice"
-                                            android:focusable="true"
-                                            android:focusableInTouchMode="true"
-                                            android:descendantFocusability="blocksDescendants"
-                                            android:clickable="true"
                                             android:background="@drawable/textview_bar" />
 
                                     </LinearLayout>
@@ -646,9 +643,14 @@
                                 </LinearLayout>
                             </TableRow>
                         </TableLayout>
-
                     </LinearLayout>
-
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="900dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:visibility="visible">
+                    </LinearLayout>
                 </LinearLayout>
             <!--</HorizontalScrollView>-->
         </ScrollView>

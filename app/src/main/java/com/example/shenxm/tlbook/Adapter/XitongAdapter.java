@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.shenxm.tlbook.Activity.BaseActivity;
 import com.example.shenxm.tlbook.Dal.DanweiDal;
-import com.example.shenxm.tlbook.Activity.MainActivity;
 import com.example.shenxm.tlbook.Fragment.MainFragment;
 import com.example.shenxm.tlbook.Model.DanweiModel;
 import com.example.shenxm.tlbook.Model.XitongModel;
@@ -86,7 +84,7 @@ public class XitongAdapter extends BaseAdapter {
                 mainFragment.xt_gview.setVisibility(View.GONE);
                 mainFragment.dw_gview.setVisibility(View.VISIBLE);
 
-                danweiAdapter=new DanweiAdapter(danweiModelList,context,mainFragment,mDanweiListener);
+                danweiAdapter=new DanweiAdapter(danweiModelList,context,mainFragment,mDanweiListener,xn.getDeptname().replace("郑州铁路局",""));
                 mainFragment.dw_gview.setAdapter(danweiAdapter);
 //                Toast.makeText(context,xn.getDeptname(),Toast.LENGTH_SHORT).show();
             }
@@ -97,9 +95,7 @@ public class XitongAdapter extends BaseAdapter {
 
     public static class ViewHolder {
         public TextView name;
-        public ImageView iv;
         public ViewHolder(View rootView) {
-           // this.iv=(ImageView)rootView.findViewById(R.id.iv_image) ;
             this.name = (TextView) rootView.findViewById(R.id.textName);
         }
 

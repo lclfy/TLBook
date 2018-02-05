@@ -1,8 +1,6 @@
 package com.example.shenxm.tlbook.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.example.shenxm.tlbook.Fragment.MainFragment;
 import com.example.shenxm.tlbook.Model.DanweiModel;
 
 import com.example.shenxm.tlbook.R;
-import com.example.shenxm.tlbook.Activity.ryxx_list_temp_fullscreen;
 
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class DanweiAdapter extends BaseAdapter {
     private List<DanweiModel> myList;
     private ViewHolder viewHolder;
     private MainFragment mainFragment;
-//    private DanweiModel danweiItem;
+    private String xitongTitle;
 
     private DanweiClickListener mListener;
 
@@ -37,12 +34,13 @@ public class DanweiAdapter extends BaseAdapter {
         public void danweiClickListener(View v,Bundle bundle);
     }
 
-    public DanweiAdapter (List<DanweiModel> list,Context context, MainFragment mainFragment, DanweiClickListener Listener)
+    public DanweiAdapter (List<DanweiModel> list,Context context, MainFragment mainFragment, DanweiClickListener Listener, String xitongTitle)
     {
         this.mListener = Listener;
         this.context=context;
         this.myList=list;
         this.mainFragment = mainFragment;
+        this.xitongTitle = xitongTitle;
     }
     @Override
     public int getCount() {
@@ -83,6 +81,7 @@ public class DanweiAdapter extends BaseAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("code",item.danweiCode);
                 bundle.putString("deptname",item.danweiname+":"+item.danweiid);
+                bundle.putString("title",xitongTitle + "  ->  " + item.getDanweiname().replace("郑州铁路局","").replace("领导","集团公司领导班子").replace("其他集团公司领导班子","集团公司其他领导").replace("郑州铁路安全监督管理办公室机车车辆验收室","机辆验收室").replace("中国铁路郑州局集团有限公司","").replace("政法委员会办公室","政法办"));
                 mListener.danweiClickListener(view,bundle);
             }
         });
