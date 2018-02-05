@@ -20,7 +20,7 @@ import com.mingle.widget.ShapeLoadingDialog;
 import java.util.List;
 
 
-public class PersonalInformationFragment extends Fragment {
+public class PersonalInformationFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private String ranage = "领导人员";
@@ -38,6 +38,8 @@ public class PersonalInformationFragment extends Fragment {
     TextView xlBtn;
     TextView mTvToolbar;
 
+    private ListView personsListView;
+
 
 
     private int sort=0;
@@ -51,7 +53,7 @@ public class PersonalInformationFragment extends Fragment {
     }
 
     public void initView(Bundle selectedItem){
-        final ListView personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
+        personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
         xingbieBtn = (TextView)view.findViewById(R.id.xbhz);
         danweiBtn = (TextView)view.findViewById(R.id.dwmc);
         xrzwBtn = (TextView)view.findViewById(R.id.xrzw);
@@ -60,6 +62,14 @@ public class PersonalInformationFragment extends Fragment {
         jbBtn = (TextView)view.findViewById(R.id.jbhz);
         xlBtn = (TextView)view.findViewById(R.id.xl);
         mTvToolbar = (TextView)view.findViewById(R.id.tv_toolbar);
+
+        xingbieBtn.setOnClickListener(this);
+        danweiBtn.setOnClickListener(this);
+        xrzwBtn.setOnClickListener(this);
+        xmBtn.setOnClickListener(this);
+        csrqBtn.setOnClickListener(this);
+        jbBtn.setOnClickListener(this);
+        xlBtn.setOnClickListener(this);
 
         mTvToolbar.setText(selectedItem.getString("title"));
         code = selectedItem.getString("code");
@@ -70,93 +80,55 @@ public class PersonalInformationFragment extends Fragment {
         personsListView.setAdapter(personsAdapter);
         myContent = getActivity();
 
-        //sort functions
-        xingbieBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","XBHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });danweiBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","DWMC",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });xrzwBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","ZWMCHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });xmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","XM",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });csrqBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","CSRQ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });jbBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","JBHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });xlBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mylist = PersonsDal.getSortedCursor(code, deptname,"","WHCDHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, myContent);
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });
     }
+
+    //sort functions
+    @Override
+    public void onClick(View view){
+        ranage=Comm.range;
+        String columnName;
+        switch (view.getId()){
+            case R.id.xbhz:{
+                columnName = "XBHZ";
+                break;
+            }
+            case R.id.xrzw:{
+                columnName = "ZWMCHZ";
+                break;
+            }
+            case R.id.dwmc:{
+                columnName = "DWMC";
+                break;
+            }
+            case R.id.xmhz:{
+                columnName = "XM";
+                break;
+            }
+            case R.id.csny:{
+                columnName = "CSRQ";
+                break;
+            }
+            case R.id.jbhz:{
+                columnName = "JBHZ";
+                break;
+            }
+            case R.id.xl:{
+                columnName = "WHCDHZ";
+                break;
+            }default:
+                return;
+        }
+        mylist = PersonsDal.getSortedCursor(code, deptname,"",columnName,sort,ranage);
+        personsAdapter = new PersonsAdapter(mylist, getActivity());
+        personsListView.setAdapter(personsAdapter);
+        if(sort==0){
+            sort=1;
+        }else if(sort==1){
+            sort=0;
+        }
+    }
+
+
 
     @Override
     public void onStart() {

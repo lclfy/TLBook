@@ -23,7 +23,7 @@ import com.example.shenxm.tlbook.R;
 import java.util.List;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements View.OnClickListener {
     private DrawerLayout drawerLayout;
     private View view;
 
@@ -40,6 +40,7 @@ public class SearchFragment extends Fragment {
     TextView jbBtn;
     TextView xlBtn;
     private int sort=0;//desc
+    ListView personsListView;
 
     SearchView mSvText;
     String searchedText;
@@ -59,15 +60,24 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void initView(){
-        final ListView personsListView = (ListView)view.findViewById(R.id.ryxx_list_full);
-        xingbieBtn = (TextView)view.findViewById(R.id.xbhz);
-        danweiBtn = (TextView)view.findViewById(R.id.dwmc);
-        xrzwBtn = (TextView)view.findViewById(R.id.xrzw);
-        xmBtn = (TextView)view.findViewById(R.id.xmhz);
-        csrqBtn = (TextView)view.findViewById(R.id.csny);
-        jbBtn = (TextView)view.findViewById(R.id.jbhz);
-        xlBtn = (TextView)view.findViewById(R.id.xl);
+    private void initView() {
+        personsListView = (ListView) view.findViewById(R.id.ryxx_list_full);
+
+        xingbieBtn = (TextView) view.findViewById(R.id.xbhz);
+        danweiBtn = (TextView) view.findViewById(R.id.dwmc);
+        xrzwBtn = (TextView) view.findViewById(R.id.xrzw);
+        xmBtn = (TextView) view.findViewById(R.id.xmhz);
+        csrqBtn = (TextView) view.findViewById(R.id.csny);
+        jbBtn = (TextView) view.findViewById(R.id.jbhz);
+        xlBtn = (TextView) view.findViewById(R.id.xl);
+
+        xingbieBtn.setOnClickListener(this);
+        danweiBtn.setOnClickListener(this);
+        xrzwBtn.setOnClickListener(this);
+        xmBtn.setOnClickListener(this);
+        csrqBtn.setOnClickListener(this);
+        jbBtn.setOnClickListener(this);
+        xlBtn.setOnClickListener(this);
 
         mSvText = (SearchView) view.findViewById(R.id.editTextsearch);
         mSvText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -75,6 +85,7 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -82,9 +93,9 @@ public class SearchFragment extends Fragment {
                 personsListView.setVisibility(View.INVISIBLE);
                 searchedText = newText;
                 if (!TextUtils.isEmpty(newText)) {
-                    ranage= Comm.range;
+                    ranage = Comm.range;
                     String searchname = newText;
-                    if(!searchname.equals("")){
+                    if (!searchname.equals("")) {
                         personsListView.setVisibility(View.VISIBLE);
                         mylist = PersonsDal.getZhuYaoCursorRange(searchname, ranage);
                         personsAdapter = new PersonsAdapter(mylist, getActivity());
@@ -94,134 +105,56 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-
+    }
         //sort functions
-        xingbieBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"XBHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+    @Override
+    public void onClick(View view){
+        if (searchedText == null ||
+                searchedText.equals("")){
+            return;
+        }
+        ranage=Comm.range;
+        String searchname = searchedText;
+        String columnName;
+        switch (view.getId()){
+            case R.id.xbhz:{
+                columnName = "XBHZ";
+                break;
             }
-        });danweiBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"DWMC",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+            case R.id.xrzw:{
+                columnName = "ZWMCHZ";
+                break;
             }
-        });xrzwBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"ZWMCHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+            case R.id.dwmc:{
+                columnName = "DWMC";
+                break;
             }
-        });xmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"XM",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+            case R.id.xmhz:{
+                columnName = "XM";
+                break;
             }
-        });csrqBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"CSRQ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+            case R.id.csny:{
+                columnName = "CSRQ";
+                break;
             }
-        });jbBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                ranage=Comm.range;
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"JBHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
+            case R.id.jbhz:{
+                columnName = "JBHZ";
+                break;
             }
-        });xlBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchedText == null ||
-                        searchedText.equals("")){
-                    return;
-                }
-                String searchname = searchedText;
-                mylist = PersonsDal.getSortedCursorSearch(searchname,"WHCDHZ",sort,ranage);
-                personsAdapter = new PersonsAdapter(mylist, getActivity());
-                personsListView.setAdapter(personsAdapter);
-                if(sort==0){
-                    sort=1;
-                }else if(sort==1){
-                    sort=0;
-                }
-            }
-        });
+            case R.id.xl:{
+                columnName = "WHCDHZ";
+                break;
+            }default:
+                return;
+        }
+        mylist = PersonsDal.getSortedCursorSearch(searchname,columnName,sort,ranage);
+        personsAdapter = new PersonsAdapter(mylist, getActivity());
+        personsListView.setAdapter(personsAdapter);
+        if(sort==0){
+            sort=1;
+        }else if(sort==1){
+            sort=0;
+        }
     }
 
 
